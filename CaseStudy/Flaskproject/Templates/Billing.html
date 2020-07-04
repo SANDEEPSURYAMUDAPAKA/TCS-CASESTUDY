@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+{% block title %}
+Desk Executive
+{% endblock %}
+{% block body %}
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">
+          {{ message }}
+        </div>
+      {% endfor %}
+    {% endif %}
+{% endwith %}
+<center><h2>Patient Billing</h2></center>
+<br>
+
+<div class="container">
+    <center>
+      <form class="form-signin" method="POST" action="">
+          {{ form.hidden_tag() }}
+        <div>
+            <b>{{ form.PatientId.label }}</b>: {{ form.PatientId }}
+            <button class="btn-primary" type="submit">Get</button>
+        </div>
+        {% if form.validate_on_submit()==False %}
+            <ul class="errors">{% for error in form.PatientId.errors %}<li>{{ error }}</li>{% endfor %}</ul>
+          {% endif %}
+      </form>
+        </center>
+</div>
+
+
+<div class="container">
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">Patient id</th>
+      <th scope="col">Name</th>
+      <th scope="col">Age</th>
+      <th scope="col">Address</th>
+      <th scope="col">Doj</th>
+      <th scope="col">Date of discharge</th>
+      <th scope="col">Type of Room</th>
+    </tr>
+  </thead>
+  {% if bill %}
+    <tbody>
+    <tr>
+      <th scope="row">{{ bill[0][0] }}</th>
+      <td>{{ bill[0][1] }}</td>
+      <td>{{ bill[0][2] }}</td>
+      <td>{{ bill[0][3] }}</td>
+      <td>{{ bill[0][4] }}</td>
+      <td>{{ bill[0][5] }}</td>
+      <td>{{ bill[0][6] }}</td>
+    </tr>
+    </tbody>
+  {% endif %}
+</table>
+</div>
+{% if bill %}
+    <center><b>No of days :</b>{{ bill[1] }}<b>Bill for room :</b>{{ bill[2] }}</center>
+{% endif %}}
+
+
+<br>
+<center><b>Pharmacy Charges</b></center>
+
+<div class="container">
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">Medicine</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">rate</th>
+      <th scope="col">Amount</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% if bill %}
+    {% for p_row in bill[3] %}
+        <tr>
+          <th scope="row">{{ p_row[0] }}</th>
+          <td>{{ p_row[1] }}</td>
+          <td>{{ p_row[2] }}</td>
+          <td>{{ p_row[3] }}</td>
+        </tr>
+    {% endfor %}
+    {% endif %}
+  </tbody>
+</table>
+</div>
+{% if bill %}
+    <center> <b>Bill for Pharmacy :</b>{{ bill[4] }}</center>
+{% endif %}
+<br>
+<center><b>Diagnostics Charges</b></center>
+<br>
+<div class="container">
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">Name of test</th>
+      <th scope="col">Amount</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% if bill %}
+    {% for d_row in bill[5] %}
+        <tr>
+          <th scope="row">{{ d_row[0] }}</th>
+          <td>{{ d_row[1] }}</td>
+        </tr>
+    {% endfor %}
+    {% endif %}
+  </tbody>
+</table>
+</div>
+{% if bill %}
+    <center> <b>Bill for Diagnostics :</b>{{ bill[6] }}</center>
+    <br>
+    <center> <b>Grand Total :</b>{{ bill[7] }}</center>
+{% endif %}
+
+<div class="container">
+    <center>
+      <form class="form-signin" method="POST" action="Billing/{{ pid }}">
+          <button class="btn btn-primary" type="submit">Confirm</button>
+      </form>
+    </center>
+</div>
+{% endblock %}

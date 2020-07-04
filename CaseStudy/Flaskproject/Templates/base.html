@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <title>{% block title %}ABC Hospital Management System{% endblock %}</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<style>
+.dropbtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #3e8e41;
+}
+.navbar.center .navbar-inner {
+    text-align: center;
+}
+
+.navbar.center .navbar-inner .nav {
+    display:inline-block;
+    float: none;
+}
+</style>
+</head>
+
+<body>
+
+<nav class="navbar navbar-dark bg-dark">
+  <span class="navbar-brand mb-0 h1">ABC Hospital Management System</span>
+</nav>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Patient
+        </a>
+
+		 <div class="dropdown">
+  <div class="dropdown-content">
+    <a class="dropdown-item" href="/CreatePatient">Patient Registration</a>
+    <a class="dropdown-item" href="/ViewAllPatients">View Patient Details</a>
+    <a class="dropdown-item" href="/SearchForPatients">Search Patient </a>
+	<a class="dropdown-item" href="/DeletePatient">Delete Patient Details</a>
+    <a class="dropdown-item" href="/EditPatient">Update Patient Details </a>
+    <a class="dropdown-item" href="/Billing">Patient Billing</a>
+	</div>
+	</div>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          Pharmacy
+        </a>
+       <div class="dropdown">
+  <div class="dropdown-content">
+    <a class="dropdown-item" href="PharmaViewPatientsDetail">Patient Details and issue medicine</a>
+    
+	</div>
+	</div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+           Diagonostics
+        </a>
+        <div class="dropdown">
+        <div class="dropdown-content" aria-labelledby="navbarDropdown2">
+          <a class="dropdown-item" href="Diagnostic">Patient Details and add test </a>
+          
+        </div>
+        </div>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="/logout">Logout</a>
+      </li>
+    </ul>
+
+  </div>
+</nav>
+
+
+{% block body %}
+{% endblock %}
+</body>
+
+</html>

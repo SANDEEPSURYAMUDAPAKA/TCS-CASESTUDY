@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}
+Edit Patient
+{% endblock %}
+
+{% block styles %}
+{{super()}}
+<link rel="stylesheet" href="{{url_for('static', filename='signin.css')}}">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+{% endblock %}
+
+
+
+
+{% block body %}
+
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+<ul class=flashes>
+    {% for category, message in messages %}
+    <center><strong>
+            <li class="{{ category }}">{{ message }}</li>
+        </strong></center>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
+
+<div class="container">
+    <center>
+        
+      <form class="form-signin" method="POST" >
+          {{ form.hidden_tag() }}
+        <h2 class="form-signin-heading">Update Patient Details</h2>
+          <div>
+            <b style="padding-left:40px ;">{{ form.PatientId.label() }}</b>
+            <b>: </b>{{ form.PatientId(class="col-2",cols=15) }}
+            <button type="submit" class="btn btn-primary btn-sm">Get</button>
+          </div>
+          {% if form.validate_on_submit()==False %}
+                 <ul class="alert-danger">{% for error in form.PatientId.errors %}<li><b><center>{{ error }}</center></b></li>{% endfor %}</ul>
+          {% endif %}
+          {% if data %}
+          <br><br>
+          <div class="container">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">Patient ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Age</th>
+                <th scope="col">DOJ</th>
+                <th scope="col">Type of Room</th>
+                <th scope="col">Address</th>
+                <th scope="col">State</th>
+                <th scope="col">City</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">{{ data.pid }}</th>
+                <td>{{ data.name }}</td>
+                <td>{{ data.age }}</td>
+                <td>{{ data.doa }}</td>
+                <td>{{ data.room }}</td>
+                <td>{{ data.address }}</td>
+                <td>{{ data.state}}</td>
+                <td>{{ data.city }}</td>
+          
+              </tr>
+            </tbody>
+          </table>
+          </div>
+          
+          {% endif %}
+            {%if data%}
+          <a style= "margin-top: -5px;" href="/EditPatient2/{{data.pid}}" class="btn btn-primary btn-lg">Update</a>
+
+            <a href="#" class="btn btn-primary btn-lg">Reset</a>
+      {%endif%}
+    </form>
+        </center>
+</div>
+
+
+
+{% endblock %}

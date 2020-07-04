@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block title %}
+pharmacist
+{% endblock %}
+{% block styles %}
+{{super()}}
+{% endblock %}
+
+{% block body %}
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+<ul class=flashes>
+    {% for category, message in messages %}
+    <center><strong>
+            <li class="{{ category }}">{{ message }}</li>
+        </strong></center>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
+
+<center><h2>Issue Medicines</h2></center>
+<br>
+
+<div class="container">
+    <center>
+      <form class="form-signin" method="POST">
+          {{ form.hidden_tag() }}
+        <div>
+            <b>{{ form.MedicineName.label }}</b>: {{ form.MedicineName }}
+            <button class="btn-primary" type="submit">Check Availblity</button>
+        </div>
+      </form>
+    </center>
+</div>
+
+{% if check %}
+{% if flag %}
+<center><b>Avaliable Quantity: {{ QuantityAvail }}</b></center>
+<div class="container">
+    <center>
+      <form class="form-signin" method="POST">
+          {{ form.hidden_tag() }}
+        <div>
+            <b>{{ form2.Quantity.label }}</b>: {{ form2.Quantity }}
+            <button class="btn-primary" type="submit">add</button>
+        </div>
+      </form>
+    </center>
+</div>
+{% else %}
+<center><b>Not Avaliable</b></center>
+{% endif %}
+{% endif %}
+
+{% if Missued %}
+
+<br>
+<div class="container">
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">Medicine</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">rate</th>
+      <th scope="col">Amout</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for d in Missued %}
+    <tr>
+      <th scope="row">{{ d[0] }}</th>
+      <td>{{ d[1] }}</td>
+      <td>{{ d[2] }}</td>
+      <td>{{ d[1]*d[2] }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+{% endif %}
+
+{% if form3 %}
+<div class="container">
+    <center>
+      <form class="form-signin" method="POST">
+          {{ form.hidden_tag() }}
+        <div>
+         {{ form3.updatebutton }}
+        </div>
+      </form>
+    </center>
+</div>
+{%endif%}
+
+{% endblock %}

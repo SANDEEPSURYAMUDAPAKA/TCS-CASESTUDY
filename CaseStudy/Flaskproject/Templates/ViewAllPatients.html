@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}
+Desk Executive
+{% endblock %}
+{% block styles %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+{{super()}}
+{% endblock %}
+
+{% block body %}
+
+<br><br>
+<center>
+  <h2 class="form-signin-heading">View All Patients</h2>
+</center>
+{% if ap %}
+<br><br>
+<div class="container">
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">Patient ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">Age</th>
+      <th scope="col">DOJ</th>
+      <th scope="col">Type of Room</th>
+      <th scope="col">Address</th>
+      <th scope="col">State</th>
+      <th scope="col">City</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for data in ap %}
+    <tr>
+      <th scope="row">{{ data.pid }}</th>
+      <td>{{ data.name }}</td>
+      <td>{{ data.age }}</td>
+      <td>{{ data.doa }}</td>
+      <td>{{ data.room }}</td>
+      <td>{{ data.address }}</td>
+      <td>{{ data.state}}</td>
+      <td>{{ data.city }}</td>
+   {% endfor %}
+
+    </tr>
+  </tbody>
+</table>
+</div>
+
+{% endif %}
+
+{% if ap==None %}
+<center><b> No Active Patient </b></center>
+{% endif %}
+
+
+{% endblock %}

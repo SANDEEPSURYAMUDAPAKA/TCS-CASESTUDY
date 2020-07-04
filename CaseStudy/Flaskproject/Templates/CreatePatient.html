@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}
+Register Patient
+{% endblock %}
+
+{% block styles %}
+{{super()}}
+<link rel="stylesheet" href="{{url_for('static', filename='signin.css')}}">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+{% endblock %}
+
+
+{% block body %}
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+<ul class=flashes>
+    {% for category, message in messages %}
+    <center><strong>
+            <li class="{{ category }}">{{ message }}</li>
+        </strong></center>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
+<form class="form-group" method="POST">
+    {{ form.hidden_tag() }}
+    <center>
+        <h2 class="form-signin-heading">Patient Registration</h2>
+
+        <div class="form-group"></div>
+
+        <!--String Feild -->
+        <div class="form-group">
+            <b>{{ form.PatientSSNId.label(class="col-2") }}:</b>
+            {{ form.PatientSSNId(class="col-2",cols=15) }}
+            {% if form.validate_on_submit()==False %}
+            <ul class="alert-danger">{% for error in form.PatientSSNId.errors %}<li>{{ error }}</li>{% endfor %}</ul>
+            {% endif %}
+        </div>
+
+        <!--String Feild -->
+        <div class="form-group">
+            <b>{{ form.patientNAME.label(class="col-2") }}:</b>
+            {{ form.patientNAME(class="col-2") }}
+            {% if form.validate_on_submit()==False %}
+            <ul class="alert-danger">{% for error in form.patientNAME.errors %}<li>{{ error }}</li>{% endfor %}</ul>
+            {% endif %}
+        </div>
+
+        <!--String Feild -->
+        <div class="form-group">
+            <b>{{ form.patientAGE.label(class="col-2") }}:</b>
+            {{ form.patientAGE(class="col-2") }}
+            {% if form.validate_on_submit()==False %}
+            <ul class="alert-danger">{% for error in form.patientAGE.errors %}<li>{{ error }}</li>{% endfor %}</ul>
+            {% endif %}
+        </div>
+
+        <!--Date Feild -->
+        <div class="form-group">
+
+            <b>{{ form.patientDOA.label(class="col-2") }}:</b>
+            {{ form.patientDOA(class="col-2") }}
+        </div>
+
+        <!--Drop down Feild -->
+        <div class="form-group">
+            <b>{{ form.TOB.label(class="col-2") }}:</b>
+            {{ form.TOB(class="col-2") }}
+            {% if form.validate_on_submit()==False %}
+            <ul class="alert-danger">{% for error in form.TOB.errors %}<li>{{ error }}</li>{% endfor %}</ul>
+            {% endif %}
+
+        </div>
+
+        <!--String Feild -->
+        <div class="form-group">
+            <b>{{ form.ADDRESS.label(class="col-2") }}:</b>
+            {{ form.ADDRESS(class="col-2") }}
+            {% if form.validate_on_submit()==False %}
+            <ul class="alert-danger">{% for error in form.ADDRESS.errors %}<li>{{ error }}</li>{% endfor %}</ul>
+            {% endif %}
+        </div>
+        <!--String Feild -->
+        <div class="form-group">
+            <b>{{ form.STATE.label(class="col-2") }}:</b>
+            {{ form.STATE(class="col-2")  }}
+            {% if form.validate_on_submit()==False %}
+            <ul class="alert-danger">{% for error in form.STATE.errors %}<li>{{ error }}</li>{% endfor %}</ul>
+            {% endif %}
+        </div>
+        <!--String Feild -->
+        <div class="form-group">
+            <b>{{ form.CITY.label(class="col-2") }}:</b>
+            {{ form.CITY(class="col-2") }}
+            {% if form.validate_on_submit()==False %}
+            <ul class="alert-danger">{% for error in form.CITY.errors %}<li>{{ error }}</li>{% endfor %}</ul>
+            {% endif %}
+        </div>
+
+
+        <input type="submit" class="btn btn-primary btn-lg" value="Submit">
+
+        <a href="#" class="btn btn-primary btn-lg">Reset</a>
+    </center>
+</form>
+
+
+
+
+{% endblock %}

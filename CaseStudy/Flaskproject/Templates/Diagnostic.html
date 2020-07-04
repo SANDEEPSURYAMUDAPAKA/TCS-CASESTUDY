@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block title %}
+Diagnostics
+{% endblock %}
+{% block body %}
+<center><h2>Diagnostics</h2></center>
+<br>
+<div class="container">
+    <center>
+      <form class="form-signin" method="POST" action="#">
+        {{ form.hidden_tag() }}
+        <div>
+            <b>{{ form.PatientId.label }}</b>: {{ form.PatientId }}
+          {% if form.validate_on_submit()==False %}
+                 <ul class="alert-danger">{% for error in form.PatientId.errors %}<li><b><center>{{ error }}</center></b></li>{% endfor %}</ul>
+          {% endif %}
+            <button class="btn-primary" type="submit">Get</button>
+        </div>
+      </form>
+        </center>
+</div>
+<br>
+<div class="container">
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">Patient ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">Age</th>
+      <th scope="col">DOJ</th>
+      <th scope="col">Type of Room</th>
+      <th scope="col">Address</th>
+      <th scope="col">State</th>
+      <th scope="col">City</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>45</td>
+      <td>22/03/1198</td>
+      <td>Shared</td>
+      <td>Ram mandir , Mathura</td>
+      <td>UP</td>
+      <td>Mathura</td>
+
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<center><b>Diagnostics Conducted</b></center>
+<div class="container">
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">Name of test</th>
+      <th scope="col">Amout</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th >CBP</th>
+      <td>Rs 2000</td>
+    </tr>
+    <tr>
+      <th >Lipid</th>
+      <td>Rs 1500</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<form method="post" action="#">
+<!--   #need to add hidden field to store patients ID-->
+<center><button class="btn btn-lg btn-primary" type="submit">Add Dignostics</button></center>
+</form>
+{% endblock %}

@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block title %}
+pharmacist
+{% endblock %}
+{% block styles %}
+{{super()}}
+{% endblock %}
+
+{% block body %}
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+<ul class=flashes>
+    {% for category, message in messages %}
+    <center><strong>
+            <li class="{{ category }}">{{ message }}</li>
+        </strong></center>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
+
+
+<div class="container">
+    <center>
+      <form class="form-signin" method="POST" action="#">
+        {{ form.hidden_tag() }}
+        <h2 class="form-signin-heading">View Patient</h2>
+          <div>
+              <b>{{ form.PatientId.label }}</b>: {{ form.PatientId }}
+            <button class="btn-primary" type="submit">Get</button>
+          </div>
+          {% if form.validate_on_submit()==False %}
+                 <ul class="alert-danger">{% for error in form.PatientId.errors %}<li><b><center>{{ error }}</center></b></li>{% endfor %}</ul>
+          {% endif %}
+      </form>
+        </center>
+</div>
+
+
+<br><br>
+
+{% if data %}
+<br><br>
+<div class="container">
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">Patient ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">Age</th>
+      <th scope="col">DOJ</th>
+      <th scope="col">Type of Room</th>
+      <th scope="col">Address</th>
+      <th scope="col">State</th>
+      <th scope="col">City</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">{{ data.pid }}</th>
+      <td>{{ data.name }}</td>
+      <td>{{ data.age }}</td>
+      <td>{{ data.doa }}</td>
+      <td>{{ data.room }}</td>
+      <td>{{ data.address }}</td>
+      <td>{{ data.state}}</td>
+      <td>{{ data.city }}</td>
+
+    </tr>
+  </tbody>
+</table>
+</div>
+
+{% endif %}
+
+
+<br>
+{% if Mdetails %}
+<center><h2>Medicine Issued</h2></center>
+
+<div class="container">
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">Medicine</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">rate</th>
+      <th scope="col">Amout</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for m in Mdetails %}
+    <tr>
+      <th scope="row">{{ m[0].name }}</th>
+      <td>{{ m[1].issued }}</td>
+      <td>{{ m[0].rate }}</td>
+      <td>{{ m[1].issued * m[0].rate }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+{% endif %}
+
+{% if Mdetails==None %}
+<center><h2>Medicine Issued</h2></center><br>
+<center><h2>No medicine Issued Yet </h2></center>
+{% endif %}
+
+{% if data %}
+
+<!--   #need to add hidden field to store patients ID-->
+<center><a class="btn btn-primary btn-lg" href="/IssueMedicines">Issue Medicine</a></center>
+
+
+{% endif %}
+
+
+{% endblock %}
